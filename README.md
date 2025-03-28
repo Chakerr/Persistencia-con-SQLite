@@ -1,55 +1,49 @@
-# README - Persistencia de Datos con SQLite en Android
+# Persistencia de Datos con SQLite en Android - Transporte de Mascotas
 
 ## Objetivo
-Persistir datos en una base de datos SQLite en una aplicación Android, permitiendo la gestión de solicitudes de transporte de carga de manera eficiente.
+Persistir datos en una base de datos SQLite en una aplicación Android, permitiendo la gestión de solicitudes de transporte de mascotas de manera eficiente.
 
 ## Desarrollo
 
-### 1. Implementación de Entidades
-Se ha creado una base de datos SQLite con una tabla llamada `solicitudes_transporte`, la cual almacena la siguiente información:
-- `id` (INTEGER, clave primaria, autoincremental)
-- `nombre_solicitante` (TEXT, no nulo)
-- `direccion_origen` (TEXT, no nulo)
-- `direccion_destino` (TEXT, no nulo)
-- `tipo_carga` (TEXT, no nulo)
-- `peso_aproximado` (REAL, no nulo)
-- `fecha_hora_transporte` (TEXT, no nulo, formato ISO 8601)
+### Implementación de Entidades
+Se ha creado una base de datos SQLite con una tabla llamada `solicitudes_transporte_mascotas`, la cual almacena la siguiente información:
+- `id`
+- `nombre_dueno`
+- `nombre_mascota`
+- `tipo_mascota`
+- `destino`
+- `hora_transporte`
 
 La base de datos ha sido gestionada mediante una clase `DatabaseHelper`, que implementa las operaciones CRUD.
 
-### 2. Creación del Formulario
+### Creación del Formulario
 Se ha desarrollado un formulario con los siguientes componentes:
-- Campos de entrada (`EditText`) para cada uno de los datos requeridos.
+- Campos de entrada (`EditText`) para el nombre del dueño y la mascota.
+- Un `Spinner` para la selección del tipo de mascota.
+- Un `Spinner` para la selección del destino del transporte.
+- Un `TimePickerDialog` para la selección de la hora del transporte.
 - Un `Button` para agregar la solicitud de transporte a la base de datos.
 - Un `Button` para consultar y visualizar las solicitudes almacenadas.
 
 Se han aplicado validaciones en los campos para evitar datos vacíos y asegurar la integridad de la información.
 
-### 3. Funcionalidad de Adición de Datos
+### Funcionalidad de Adición de Datos
 El botón de adición de datos captura la información ingresada y la almacena en SQLite mediante la siguiente lógica:
 - Se obtienen los valores de los campos.
 - Se valida que no haya datos vacíos.
-- Se inserta la información en la tabla `solicitudes_transporte` utilizando `SQLiteDatabase` y `ContentValues`.
+- Se inserta la información en la tabla `solicitudes_transporte_mascotas` utilizando `SQLiteDatabase` y `ContentValues`.
 - Se muestra un mensaje de éxito o error según la operación.
 
-### 4. Funcionalidad de Consulta de Datos
+### Funcionalidad de Consulta de Datos
 El botón de consulta permite visualizar los datos almacenados en SQLite. La implementación sigue estos pasos:
-- Se consulta la tabla `solicitudes_transporte`.
+- Se consulta la tabla `solicitudes_transporte_mascotas`.
 - Los datos recuperados se almacenan en una lista.
-- Se utiliza un `RecyclerView` para mostrar la información de manera estructurada.
+- Se muestra la información en un `TextView`.
 - Se actualiza la vista dinámicamente para reflejar cambios en la base de datos.
-
-### 5. Pruebas y Validaciones
-- Se verificó la persistencia de datos en SQLite tras el cierre y reapertura de la aplicación.
-- Se probaron inserciones, consultas y recuperación de datos en distintos dispositivos y emuladores.
-- Se optimizó el rendimiento en consultas para evitar bloqueos en la UI.
-- Se realizaron pruebas con datos erróneos para asegurar la robustez de la validación.
 
 ## Tecnologías Utilizadas
 - Android Studio
 - Java
 - SQLite
-- RecyclerView para la visualización de datos
-
-Este sistema garantiza una persistencia confiable y una experiencia de usuario fluida para la gestión de solicitudes de transporte de carga.
-
+- Spinner para selección de opciones
+- TimePickerDialog para la selección de hora
